@@ -6,19 +6,19 @@ import (
 	"os"
 )
 
-func brainfuck(src, input string) {
-	var tape = []int{0}
-	var tapeIndex = 0
-	fmt.Println(tape)
+func brainfuck(src string) []uint8 {
+	tape := []uint8{0}
+	tapeIndex := 0
 
-	for i := range src {
-		var char = string(src[i])
+	srcLength := len(src)
+
+	for srcIndex := 0; srcIndex < srcLength; srcIndex++ {
+		char := string(src[srcIndex])
 
 		switch {
 		case char == ">":
 			tapeIndex += 1
 			if len(tape) <= tapeIndex {
-				fmt.Println("extending tape")
 				tape = append(tape, 0)
 			}
 
@@ -26,30 +26,51 @@ func brainfuck(src, input string) {
 			if tapeIndex > 0 {
 				tapeIndex -= 1
 			}
-			fmt.Println("<")
 
 		case char == "+":
 			tape[tapeIndex] += 1
-			fmt.Println("+")
 
 		case char == "-":
 			tape[tapeIndex] -= 1
-			fmt.Println("-")
 
 		case char == ".":
-			fmt.Println(".")
+			print(string(uint8(tape[tapeIndex])))
 
 		case char == ",":
-			fmt.Println(",")
+			b := make([]byte, 1)
+			os.Stdin.Read(b)
+			tape[tapeIndex] = b[0]
 
 		case char == "[":
-			fmt.Println("[")
+			if tape[tapeIndex] == 0 {
+				depth := 1
+				for depth > 0 {
+					srcIndex++
+					srcCharacter := string(src[srcIndex])
+					if srcCharacter == "[" {
+						depth++
+					} else if srcCharacter == "]" {
+						depth--
+					}
+				}
+			}
 
 		case char == "]":
-			fmt.Println("]")
-
+			depth := 1
+			for depth > 0 {
+				srcIndex--
+				srcCharacter := string(src[srcIndex])
+				if srcCharacter == "[" {
+					depth--
+				} else if srcCharacter == "]" {
+					depth++
+				}
+			}
+			srcIndex--
 		}
 	}
+
+	return tape
 }
 
 func main() {
@@ -59,8 +80,7 @@ func main() {
 		fmt.Println(err)
 	} else {
 		var src = string(content)
-		var input = os.Args[2]
 
-		brainfuck(src, input)
+		brainfuck(src)
 	}
 }
