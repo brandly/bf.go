@@ -17,9 +17,10 @@ func brainfuck(src, input string) {
         switch {
         case char == ">":
             tapeIndex += 1
-            if len(tape) <= tapeIndex
-                fmt.Println('extending tape')
-                tape = tape.append(0)
+            if len(tape) <= tapeIndex {
+                fmt.Println("extending tape")
+                tape = append(tape, 0)
+            }
 
         case char == "<":
             if tapeIndex > 0 {
