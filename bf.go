@@ -45,10 +45,10 @@ func brainfuck(src string) []uint8 {
 				depth := 1
 				for depth > 0 {
 					srcIndex++
-					srcCharacter := string(src[srcIndex])
-					if srcCharacter == "[" {
+					srcCharacter := src[srcIndex]
+					if srcCharacter == '[' {
 						depth++
-					} else if srcCharacter == "]" {
+					} else if srcCharacter == ']' {
 						depth--
 					}
 				}
@@ -58,10 +58,10 @@ func brainfuck(src string) []uint8 {
 			depth := 1
 			for depth > 0 {
 				srcIndex--
-				srcCharacter := string(src[srcIndex])
-				if srcCharacter == "[" {
+				srcCharacter := src[srcIndex]
+				if srcCharacter == '[' {
 					depth--
-				} else if srcCharacter == "]" {
+				} else if srcCharacter == ']' {
 					depth++
 				}
 			}
