@@ -33,7 +33,7 @@ func brainfuck(src string) []uint8 {
 			tape[tapeIndex] -= 1
 
 		case '.':
-			print(string(uint8(tape[tapeIndex])))
+			fmt.Print(string(uint8(tape[tapeIndex])))
 
 		case ',':
 			b := make([]byte, 1)
