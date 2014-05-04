@@ -13,35 +13,34 @@ func brainfuck(src string) []uint8 {
 	srcLength := len(src)
 
 	for srcIndex := 0; srcIndex < srcLength; srcIndex++ {
-		char := string(src[srcIndex])
 
-		switch char {
-		case ">":
+		switch src[srcIndex] {
+		case '>':
 			tapeIndex += 1
 			if len(tape) <= tapeIndex {
 				tape = append(tape, 0)
 			}
 
-		case "<":
+		case '<':
 			if tapeIndex > 0 {
 				tapeIndex -= 1
 			}
 
-		case "+":
+		case '+':
 			tape[tapeIndex] += 1
 
-		case "-":
+		case '-':
 			tape[tapeIndex] -= 1
 
-		case ".":
+		case '.':
 			print(string(uint8(tape[tapeIndex])))
 
-		case ",":
+		case ',':
 			b := make([]byte, 1)
 			os.Stdin.Read(b)
 			tape[tapeIndex] = b[0]
 
-		case "[":
+		case '[':
 			if tape[tapeIndex] == 0 {
 				depth := 1
 				for depth > 0 {
@@ -55,7 +54,7 @@ func brainfuck(src string) []uint8 {
 				}
 			}
 
-		case "]":
+		case ']':
 			depth := 1
 			for depth > 0 {
 				srcIndex--
