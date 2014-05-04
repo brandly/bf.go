@@ -42,8 +42,7 @@ func brainfuck(src string) []uint8 {
 
 		case '[':
 			if tape[tapeIndex] == 0 {
-				depth := 1
-				for depth > 0 {
+				for depth := 1; depth > 0; {
 					srcIndex++
 					srcCharacter := src[srcIndex]
 					if srcCharacter == '[' {
@@ -55,8 +54,7 @@ func brainfuck(src string) []uint8 {
 			}
 
 		case ']':
-			depth := 1
-			for depth > 0 {
+			for depth := 1; depth > 0; {
 				srcIndex--
 				srcCharacter := src[srcIndex]
 				if srcCharacter == '[' {
