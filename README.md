@@ -13,3 +13,11 @@ reads input from stdin
 $ go run bf.go test/cat.bf < test/hello.bf
 ++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.
 ```
+
+you can also compile it first
+
+```shell
+$ go build bf.go
+$ ./bf test/hello.bf
+Hello World!
+```
